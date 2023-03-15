@@ -1,4 +1,5 @@
 import express from "express";
+import config from "./config";
 
 const server = express();
 
@@ -10,10 +11,10 @@ server.set("view engine", "ejs");
 // Variables can be passed via res.render 2nd parameter. It will be used to injecr React into HTML template
 server.use("/", (req, res) => {
     res.render("index", {
-        content: 'EJS is cool'
+      initialContent: 'Loading...'
     })
 })
 
-server.listen("8080", "localhost", () => {
-  console.info("Server is listening at http://localhost:8080");
+server.listen(config.PORT, config.HOST, () => {
+  console.info(`Server is listening at ${config.SERVER_URL}`);
 });
