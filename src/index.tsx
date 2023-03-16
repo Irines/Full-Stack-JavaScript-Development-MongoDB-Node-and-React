@@ -8,5 +8,5 @@ const container = document.getElementById("app")
 const root = createRoot(container)
 axios.get(`${SERVER_API_URL}/contests`).then((response) => {
     console.log(response.data)
+    root.render(<App contestsData={{contests: response.data.contests}}/>)
 })
-root.render(<App />)

@@ -8,7 +8,7 @@ router.use(cors())
 
 router.get("/contests", (req, res) => {
   // get data from the MongoDB
-  res.send(testData);
+  res.send({contests: testData});
 });
 
 export default router;
