@@ -1,7 +1,6 @@
 import express from "express";
 import config from "./config";
 import apiRouter from "./api-router";
-
 const server = express();
 
 // middleware
