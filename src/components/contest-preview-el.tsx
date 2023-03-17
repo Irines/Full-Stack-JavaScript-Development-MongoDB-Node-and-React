@@ -7,7 +7,7 @@ const ContestPreview: React.RC<{ el: object }> = ({ el }) => {
         console.log("handleClick")
         event.preventDefault();
         // navigate to the single contest view
-        setPage("contest")
+        setPage({name: "contest", id: el.id})
     }
     return (
         <div className="contest-preview" onClick={handleClick}>

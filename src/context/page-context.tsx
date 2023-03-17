@@ -1,2 +1,2 @@
 import { createContext } from 'react';
-export const PageContext = createContext('contestList');
+export const PageContext = createContext({name: 'contestList', id: null});

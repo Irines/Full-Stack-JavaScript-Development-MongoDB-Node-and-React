@@ -2,23 +2,25 @@ import Header from "./header";
 import { useState, useMemo } from "react";
 import ContestList from "./contest-list";
 import { PageContext } from "../context/page-context";
+import Contest from "./contest";
 
 // page: contestList, contest
 
 const App = ({contestsData}) => {
-  let [page, setPage] = useState("contestList")
+  let [page, setPage] = useState({name: "contestList"})
   const value = useMemo(
     () => ({ page, setPage }), 
-    [page]
+    [page.name]
   );
 
   const pageContent = () => {
-    switch (page) {
+    console.log("page changed ", page)
+    switch (page.name) {
       case "contestList":
         return <ContestList initialContests={contestsData}/>
         break;
       case "contest":
-        return <h2>Contest Page</h2>
+        return <Contest id={page.id}/>
         break;
       default:
         return <ContestList initialContests={contestsData}/>
