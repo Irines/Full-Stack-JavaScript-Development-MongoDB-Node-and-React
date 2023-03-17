@@ -4,4 +4,4 @@ import App from "./components/app";
 const container = document.getElementById("app")
 const root = createRoot(container)
 
-root.render(<App contestsData={{contests: []}}/>)
+root.render(<App contestsData={(window as any).initialData}/>)

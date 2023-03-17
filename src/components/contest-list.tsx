@@ -4,15 +4,16 @@ import { useState, useEffect, Suspense } from "react";
 import Spinner from "./spinner";
 
 const ContestList = ({ initialContests }) => {
+    debugger;
     let [contests, setContests] = useState(initialContests.contests)
     let [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchAllContests().then((data) => {
-            setContests(data.contests)
-            console.log("loaded data", data.contests)
-            setLoading(false)
-        })
+        // fetchAllContests().then((contests) => {
+        //     setContests(contests)
+        //     console.log("loaded data", contests)
+        //     setLoading(false)
+        // })
     }, [])
 
     return (
