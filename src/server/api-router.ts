@@ -56,4 +56,26 @@ router.post("/contest/:contestId", async (req, res) => {
   res.send({ updatedContest: doc.value });
 });
 
+router.post("/contests", async (req, res) => {
+  // push new contest name to MongoDB
+  const client = await connectClient();
+  const { contestName, categoryName, description } = req.body;
+  
+  const newId = contestName.toLowerCase().replace(/\s/g, "");
+  const doc = await client
+    .collection("contests")
+    .insertOne({
+        id: newId,
+        contestName,
+        categoryName,
+        description,
+        names: []
+  })
+
+  const contest = await client
+    .collection("contests")
+    .findOne( {_id: doc.insertedId });
+  res.send({ contest });
+});
+
 export default router;

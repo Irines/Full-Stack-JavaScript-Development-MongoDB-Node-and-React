@@ -101,3 +101,23 @@ form button {
   margin: 2rem auto;
   text-align: center;
 }
+
+.new-contest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  margin-left: calc(50% - 200px);
+}
+
+.titleLink {
+  font-size: 1.2rem;
+  margin: 2rem auto;
+  margin-left: calc(50% - 62px);
+}
+
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+  "Droid Sans", "Helvetica Neue", sans-serif;
+}

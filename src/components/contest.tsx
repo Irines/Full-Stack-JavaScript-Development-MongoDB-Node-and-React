@@ -27,8 +27,7 @@ const Contest = ({ initialContest }) => {
     const handleFormSubmit = (event) => {
         event.preventDefault();
         const newName = event.target.newName;
-        console.log("newName.value", newName.value);
-        addNewName(newName.value)
+        addNewName(newName.value);
     }
 
     const addNewName = async (name) => {
@@ -36,7 +35,7 @@ const Contest = ({ initialContest }) => {
             contestId: currentContest.id,
             newNameValue: name
         })
-        console.log("response", resp);
+        setCurrentContest(resp);
     }
 
     return (

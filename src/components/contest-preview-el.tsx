@@ -9,12 +9,12 @@ const ContestPreview: React.RC<{ el: object }> = ({ el }) => {
         // navigate to the single contest view via PageContext callback function
         // using native DOM API to navigate routes
         event.preventDefault();
-        setPage({ name: "contest", id: el.id })
+        setPage({ name: "contest", id: el.id });
         window.history.pushState(
             el.id,
             "",
             `/contest/${el.id}`
-        )
+        );
     }
     return (
         <div className="contest-preview link" onClick={handleClick}>

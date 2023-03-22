@@ -14,12 +14,10 @@ const App = ({ initialData }) => {
   // popstate event works only if you add one or more history entry/entries 
   // and later the user clicks the back button in the browser.
   useEffect(() => {
-    setContest(contest => ({
-      ...contest,
+    setContest({
       id: page?.id
-    }))
+    })
     window.onpopstate = (event) => {
-      console.log(event)
       const newPage = event.state?.contestId ? "contest" : "contestList";
       setPage(newPage);
       // setContest({id: event.state?.contestId});
@@ -27,10 +25,9 @@ const App = ({ initialData }) => {
   }, [])
 
   useEffect(() => {
-    setContest(contest => ({
-      ...contest,
+    setContest({
       id: page?.id
-    }))
+    })
   }, [page])
 
   const pageContent = () => {
