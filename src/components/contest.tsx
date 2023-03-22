@@ -30,6 +30,22 @@ const Contest = ({ initialContest }) => {
             <div className="contest">
                 <div className="title">Contest Description</div>
                 <div className="description">{currentContest?.description}</div>
+                <div className="title">Proposed Names</div>
+                <div className="body">
+                    {
+                        currentContest?.names?.length 
+                        ? 
+                        (
+                            <div className="list">
+                                {currentContest.names.map((nameObj) => (
+                                    <div key={nameObj.id} className="item">{nameObj.name}</div>
+                                ))}
+                            </div>
+                        )
+                        :
+                        <div>No names proposed yet. </div>
+                    }
+                </div>
                 <a href="/" className="link" onClick={navigateToContestList}>Contest List</a>
             </div>
         </>
