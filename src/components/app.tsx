@@ -3,34 +3,47 @@ import ContestList from "./contest-list";
 import { PageContext } from "../context/page-context";
 import Contest from "./contest";
 
-const App = ({contestsData}) => {
-  let [page, setPage] = useState({name: "contestList"});
-  let [contestId, setContestId] = useState<string | undefined>("");
+const App = ({ initialData }) => {
+  let [page, setPage] = useState(initialData.currentContest ? { name: "contest", id: initialData.currentContest?.id } : { name: "contestList" });
+  let [contest, setContest] = useState<object | undefined>(initialData.currentContest);
   const value = useMemo(
-    () => ({ page, setPage }), 
+    () => ({ page, setPage }),
     [page.name]
   );
 
+  // popstate event works only if you add one or more history entry/entries 
+  // and later the user clicks the back button in the browser.
   useEffect(() => {
+    setContest(contest => ({
+      ...contest,
+      id: page?.id
+    }))
     window.onpopstate = (event) => {
       console.log(event)
       const newPage = event.state?.contestId ? "contest" : "contestList";
       setPage(newPage);
-      setContestId(event.state?.contestId);
+      // setContest({id: event.state?.contestId});
     }
   }, [])
 
+  useEffect(() => {
+    setContest(contest => ({
+      ...contest,
+      id: page?.id
+    }))
+  }, [page])
+
   const pageContent = () => {
-    console.log("page changed ", page)
+    console.log("page changed ", page);
     switch (page.name) {
       case "contestList":
-        return <ContestList initialContests={contestsData}/>
+        return <ContestList initialContests={initialData} />
         break;
       case "contest":
-        return <Contest id={page.id}/>
+        return <Contest initialContest={contest} />
         break;
       default:
-        return <ContestList initialContests={contestsData}/>
+        return <ContestList initialContests={initialData} />
         break;
     }
   }
@@ -38,7 +51,7 @@ const App = ({contestsData}) => {
   return (
     <PageContext.Provider value={value}>
       <div className="container">
-          {pageContent()}
+        {pageContent()}
       </div>
     </PageContext.Provider>
   );

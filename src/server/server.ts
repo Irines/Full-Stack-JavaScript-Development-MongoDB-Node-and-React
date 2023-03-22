@@ -12,8 +12,8 @@ server.set("view engine", "ejs");
 server.use("/api", apiRouter);
 
 // Variables can be passed via res.render 2nd parameter. It will be used to injecr React into HTML template
-server.get("/", async (req, res) => {
-  const { initialMarkup, initialData } = await serverRender();
+server.get(["/", "/contest/:contestId"], async (req, res) => {
+  const { initialMarkup, initialData } = await serverRender(req);
   res.render("index", {
     initialMarkup,
     initialData

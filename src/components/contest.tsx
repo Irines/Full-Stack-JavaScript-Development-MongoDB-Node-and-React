@@ -1,21 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { fetchContest } from "../api-client";
+import { PageContext } from "../context/page-context";
 import Header from "./header";
 
-const Contest = ({ id }) => {
-    let [contest, setContest] = useState({})
+const Contest = ({ initialContest }) => {
+    let [currentContest, setCurrentContest] = useState(initialContest);
+    const { page, setPage } = useContext(PageContext);
+
     useEffect(() => {
-        fetchContest(id).then((contest) => {
-            setContest(contest)
-        })
-    }, [id])
+        // to check if we need to make a request query 
+        // if we directly enter link /contest/:contestId it's SSR
+        // if we navigate from the main page, we need to fetch data
+        if (!initialContest.names) {
+            fetchContest(initialContest.id).then((contest) => {
+                setCurrentContest(contest);
+            })
+        }
+    }, [initialContest.id, initialContest.names])
+
+    const navigateToContestList = (event) => {
+        event.preventDefault();
+        setPage({ name: "contestList" });
+        window.history.pushState({}, "", `/`);
+    }
 
     return (
         <>
-            <Header message={contest.contestName} />
+            <Header message={currentContest?.contestName} />
             <div className="contest">
                 <div className="title">Contest Description</div>
-                <div className="description">{contest.description}</div>
+                <div className="description">{currentContest?.description}</div>
+                <a href="/" className="link" onClick={navigateToContestList}>Contest List</a>
             </div>
         </>
     )
